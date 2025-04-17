@@ -14,7 +14,7 @@ export default function Footer() {
               Educating users about deceptive design practices and promoting ethical web design.
             </p>
             <div className="flex mt-4 space-x-4">
-              <Link href="https://github.com" className="text-muted-foreground hover:text-primary">
+              <Link href="https://github.com/sept1st2c/SakV" className="text-muted-foreground hover:text-primary">
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </Link>
@@ -22,7 +22,7 @@ export default function Footer() {
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </Link>
-              <Link href="mailto:contact@darkpatterns.info" className="text-muted-foreground hover:text-primary">
+              <Link href="mailto:3shubh17@gmail.com" className="text-muted-foreground hover:text-primary">
                 <Mail className="h-5 w-5" />
                 <span className="sr-only">Email</span>
               </Link>
@@ -53,6 +53,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/extension" className="text-muted-foreground hover:text-primary">
+                  SakV Extension
+                </Link>
+              </li>
+              <li>
                 <Link href="/report" className="text-muted-foreground hover:text-primary">
                   Report a Dark Pattern
                 </Link>
@@ -64,8 +69,8 @@ export default function Footer() {
             <h3 className="font-medium mb-3">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary">
-                  Research Papers
+                <Link href="https://github.com/sept1st2c/SakV" className="text-muted-foreground hover:text-primary">
+                  GitHub Repository
                 </Link>
               </li>
               <li>
@@ -79,12 +84,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary">
-                  Browser Extensions
+                <Link href="/extension" className="text-muted-foreground hover:text-primary">
+                  Browser Extension
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary">
+                <Link href="mailto:3shubh17@gmail.com" className="text-muted-foreground hover:text-primary">
                   Contact Us
                 </Link>
               </li>

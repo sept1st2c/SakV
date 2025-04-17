@@ -16,6 +16,7 @@ export default function Navigation() {
     { name: "Types", path: "/types" },
     { name: "Examples", path: "/examples" },
     { name: "How to Avoid", path: "/avoid" },
+    { name: "Extension", path: "/extension" },
     { name: "Report", path: "/report" },
   ]
 

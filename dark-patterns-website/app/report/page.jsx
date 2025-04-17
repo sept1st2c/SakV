@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -8,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
-import { AlertCircle, CheckCircle, Upload } from "lucide-react"
+import { AlertCircle, CheckCircle, Mail } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 export default function ReportPage() {
@@ -72,25 +74,38 @@ export default function ReportPage() {
       return
     }
 
-    // Simulate form submission
-    setTimeout(() => {
-      setFormStatus({
-        submitted: true,
-        error: false,
-        message: "Thank you for your report! We will review it shortly.",
-      })
+    // Create mailto link with form data
+    const subject = encodeURIComponent(`Dark Pattern Report: ${formState.website} - ${formState.patternType}`)
+    const body = encodeURIComponent(`
+Website: ${formState.website}
+Pattern Type: ${formState.patternType}
+Description: ${formState.description}
+Impact: ${formState.impact}
+Reporter Email: ${formState.email}
 
-      // Reset form
-      setFormState({
-        website: "",
-        patternType: "",
-        description: "",
-        screenshot: null,
-        impact: "",
-        consent: false,
-        email: "",
-      })
-    }, 1500)
+This report was submitted through the DarkPatterns.info website.
+    `)
+
+    // Open mailto link
+    window.location.href = `mailto:3shubh17@gmail.com?subject=${subject}&body=${body}`
+
+    // Show success message
+    setFormStatus({
+      submitted: true,
+      error: false,
+      message: "Thank you for your report! Your email client has been opened to send the report.",
+    })
+
+    // Reset form
+    setFormState({
+      website: "",
+      patternType: "",
+      description: "",
+      screenshot: null,
+      impact: "",
+      consent: false,
+      email: "",
+    })
   }
 
   return (
@@ -120,7 +135,8 @@ export default function ReportPage() {
             <CardHeader>
               <CardTitle>Dark Pattern Report Form</CardTitle>
               <CardDescription>
-                Please provide as much detail as possible to help us understand and document the dark pattern.
+                Please provide as much detail as possible to help us understand and document the dark pattern. Your
+                report will be sent directly to our team via email.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -175,34 +191,6 @@ export default function ReportPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="screenshot">Screenshot or Recording (optional)</Label>
-                <div className="flex items-center justify-center w-full">
-                  <label
-                    htmlFor="screenshot"
-                    className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer bg-muted/50 hover:bg-muted"
-                  >
-                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                      <Upload className="w-8 h-8 mb-3 text-muted-foreground" />
-                      <p className="mb-2 text-sm text-muted-foreground">
-                        <span className="font-semibold">Click to upload</span> or drag and drop
-                      </p>
-                      <p className="text-xs text-muted-foreground">PNG, JPG, GIF or MP4 (MAX. 10MB)</p>
-                    </div>
-                    <input
-                      id="screenshot"
-                      type="file"
-                      className="hidden"
-                      accept="image/png, image/jpeg, image/gif, video/mp4"
-                      onChange={handleFileChange}
-                    />
-                  </label>
-                </div>
-                {formState.screenshot && (
-                  <p className="text-sm text-muted-foreground">File selected: {formState.screenshot.name}</p>
-                )}
-              </div>
-
-              <div className="space-y-2">
                 <Label htmlFor="impact">Impact (optional)</Label>
                 <Textarea
                   id="impact"
@@ -232,6 +220,16 @@ export default function ReportPage() {
                   I consent to having this report stored in the dark patterns database. I understand that all personal
                   information will be anonymized. *
                 </Label>
+              </div>
+
+              <div className="bg-muted p-4 rounded-md">
+                <p className="text-sm flex items-center">
+                  <Mail className="h-4 w-4 mr-2 text-primary" />
+                  <span>
+                    Your report will be sent directly to <strong>3shubh17@gmail.com</strong> via your default email
+                    client. If you have screenshots, please attach them to the email before sending.
+                  </span>
+                </p>
               </div>
             </CardContent>
             <CardFooter>
@@ -265,6 +263,10 @@ export default function ReportPage() {
                   <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
                   <span>Support potential regulatory action</span>
                 </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                  <span>Improve the SakV extension by reporting undetected patterns</span>
+                </li>
               </ul>
             </CardContent>
           </Card>
@@ -281,6 +283,13 @@ export default function ReportPage() {
                 <li>Serious violations may be reported to relevant authorities</li>
                 <li>Your contribution helps make the web more ethical!</li>
               </ol>
+              <div className="mt-6 pt-4 border-t">
+                <Link href="/extension">
+                  <Button variant="outline" className="w-full">
+                    Learn About Our Extension
+                  </Button>
+                </Link>
+              </div>
             </CardContent>
           </Card>
         </div>
